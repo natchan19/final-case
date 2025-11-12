@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Task Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 700px; margin: 2rem auto; }
+    .row { display: flex; gap: .5rem; }
+    li { display:flex; align-items:center; gap:.5rem; padding:.25rem 0; }
+    button { cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Task Tracker</h1>
+  <div class="row">
+    <input id="title" placeholder="New task..." />
+    <button onclick="addTask()">Add</button>
+  </div>
+  <ul id="list"></ul>
+  <script src="/static/app.js"></script>
+</body>
+</html>
