@@ -28,8 +28,11 @@ curl http://localhost:5050/health
 
 # Design Decisions
 Why this concept: Flask was lightweight, easy for containerization, and good for beginners. Alternatives considered: SQLite or MongoDB. However, they weren’t chosen 
+
 Tradeoffs: In-memory tasks vanish on restart; simple but not persistent. 
+
 Security/Privacy: No secrets in repo; .env.example provided; input validated. 
+
 Ops: Logs to stdout; one-command run; known limitation = non-persistent data.
 
 # Results & Evaluation
