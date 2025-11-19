@@ -7,7 +7,7 @@ This app makes it so that you can have everything on your To-Do List in one plac
 This is a minimal task management dashboard built on a Flask API, with a browser-based UI that lists tasks and lets users add, complete, and delete them. This is based on Case 1 and 4. 
 
 Architecture Diagram:
-![Architecture Diagram](assets/arch.png)
+![Architecture Diagram](assets/ArchDiagram.png)
 
 Data/Models/Services: 
 All data is stored as an in-memory Python dictionary of tasks (id, title, done) managed by the Flask API in src/app.py. The only “service” is the Flask web service itself, which is containerized with Docker and exposes REST endpoints plus a /health check.
