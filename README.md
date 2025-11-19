@@ -14,11 +14,16 @@ All data is stored as an in-memory Python dictionary of tasks (id, title, done) 
 
 
 # How to Run:
-build docker 
+- build docker 
+
 build -t task-tracker:latest . 
-run 
+
+- run 
+
 docker run --rm -p 5050:5050 --env-file .env task-tracker:latest 
-health check 
+
+- health check 
+
 curl http://localhost:5050/health
 
 # Design Decisions
