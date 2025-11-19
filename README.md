@@ -37,5 +37,5 @@ Security/Privacy: No secrets in repo; .env.example provided; input validated.
 Ops: Logs to stdout; one-command run; known limitation = non-persistent data.
 
 # Results & Evaluation
-oop
+![screenshot](assets/tasktrackersample.png)
 
