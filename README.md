@@ -10,8 +10,7 @@ Architecture Diagram:
 ![Architecture Diagram](assets/ArchDiagram.png)
 
 Data/Models/Services: 
-All data is stored as an in-memory Python dictionary of tasks (id, title, done) managed by the Flask API in src/app.py. The only “service” is the Flask web service itself, which is containerized with Docker and exposes REST endpoints plus a /health check.
-
+All data is stored as an in-memory Python dictionary of tasks (id, title, done) managed by the Flask API in src/app.py. The only service is the Flask web service itself, which is containerized with Docker and exposes REST endpoints plus a /health check.
 
 
 # How to Run:
@@ -28,13 +27,13 @@ docker run --rm -p 5050:5050 --env-file .env task-tracker:latest
 curl http://localhost:5050/health
 
 # Design Decisions
-Why this concept: Flask was lightweight, easy for containerization, and good for beginners. Alternatives considered: SQLite or MongoDB. However, they weren’t chosen 
+Why this concept: Flask was lightweight, easy for containerization, and good for beginners. Alternatives considered: SQLite or MongoDB. However, they weren’t chosen because I think it would've been too complicated for the timeframe given.
 
-Tradeoffs: In-memory tasks vanish on restart; simple but not persistent. 
+Tradeoffs: In-memory tasks vanish on restart. It's also all manual clicking and typing for some functions with no keyboard shortcuts.  
 
-Security/Privacy: No secrets in repo; .env.example provided; input validated. 
+Security/Privacy: The app only stores short task titles in an in-memory Python dictionary. It does not collect names, emails, passwords, or any personally identifiable information (PII). Since data lives only in memory and resets when the container restarts, no long-term user data is retained. This reduces privacy risk. The project includes a .env.example file but does not store any real secrets or tokens in source control, aligning with best practices. The API checks for missing or invalid input (e.g., empty task titles) and returns appropriate error responses instead of blindly accepting data. The app runs locally or inside a local Docker container, so there is no external network exposure unless the user chooses to deploy it. 
 
-Ops: Logs to stdout; one-command run; known limitation = non-persistent data.
+Ops: The Flask app prints basic request and runtime information to standard output (stdout). When running in Docker, these logs can be viewed with docker logs, which makes it easy to see errors or startup messages. No advanced log aggregation is used. The primary “health” signal is the /health endpoint, which returns {"status":"ok"} to confirm the API is running. No performance metrics or usage tracking are collected, which keeps the system simple and low-risk. The app uses a single Flask process and an in-memory dictionary. It works well for one user and small workloads. However, it would not scale to multiple simultaneous users or multiple containers because each instance would have its own separate task list. The app has no authentication or authorization, meaning anyone with access to the running app could modify tasks. This is acceptable for a demo but would need to be addressed before real-world or multi-user use.
 
 # Results & Evaluation
 ![screenshot](assets/tasktrackersample.png)
