@@ -1,7 +1,7 @@
 # Executive Summary
 This app is for the students who have trouble keeping track of the tasks they have to do. 
 
-This app makes it so that you can have everything on your To-Do List in one place. In the text box, you write a task that you need to get done and then press the "add" button to add it to your list. After you finish the task, there is a box that you can press to check off the task. Text next to your task will say "(done)" to indicate the box is done after checking off the box. After that, you can also delete the task so the list doesn’t get too long. 
+This app makes it so that you can have everything on your To-Do List in one place. In the text box, you write a task that you need to get done and then press the "add" button to add it to your list. From there you can edit the status of the task by clicking on the button for it. Each click cycles through marking it "Not Finished", "In Progress", and "Done". After that, you can also delete the task so the list doesn’t get too long. 
 
 # System Overview
 This is a minimal task management dashboard built on a Flask API, with a browser-based UI that lists tasks and lets users add, complete, and delete them. This is based on Case 1 and 4. 
