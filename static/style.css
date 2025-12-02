@@ -1,3 +1,93 @@
+body {
+  margin: 2rem auto;
+  padding: 0 1rem;
+  max-width: 900px;
+  font-family: system-ui, sans-serif;
+  background: #f7f7fb;
+  color: #222;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.add-row {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: 1.5rem;
+}
+
+input, select, button {
+  padding: .55rem .75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+button {
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+th, td {
+  padding: .9rem 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+tr:hover td {
+  background: #f9fafb;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 600;
+}
+
+.badge.not-started { background: #fee2e2; color: #b91c1c; }
+.badge.in-progress { background: #fef3c7; color: #b45309; }
+.badge.done        { background: #d1fae5; color: #065f46; }
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+}
+.delete-btn:hover { color: #b91c1c; }
+
+/* Make badge clickable */
+.clickable {
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.clickable:hover {
+  transform: scale(1.07);
+}
+
 /* Column alignment fixes */
 th, td {
   vertical-align: middle;
@@ -20,3 +110,6 @@ th:nth-child(3),
 td:nth-child(3) {
   text-align: right;
 }
+
+
+
