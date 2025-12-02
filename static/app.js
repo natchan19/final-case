@@ -1,6 +1,24 @@
 const bodyEl = document.getElementById("taskBody");
 const titleEl = document.getElementById("title");
-const statusEl = document.getElementById("statusSelect");
+
+// Status cycle order
+const cycle = ["not started", "in progress", "done"];
+
+function nextStatus(current) {
+  const idx = cycle.indexOf(current);
+  return cycle[(idx + 1) % cycle.length];
+}
+
+function cssClass(s) {
+  return s.replace(" ", "-");
+}
+
+function label(s) {
+  return s
+    .split(" ")
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
 
 // LOAD TASKS
 async function load() {
@@ -15,33 +33,27 @@ async function load() {
     const tdTitle = document.createElement("td");
     tdTitle.textContent = t.title;
 
-    // Status dropdown
+    // Status badge (clickable)
     const tdStatus = document.createElement("td");
-
-    const select = document.createElement("select");
-    select.className = "status-select";
-    select.innerHTML = `
-      <option value="not started">Not Started</option>
-      <option value="in progress">In Progress</option>
-      <option value="done">Done</option>
-    `;
-    select.value = t.status;
-    select.onchange = () => updateStatus(t.id, select.value);
-
     const badge = document.createElement("span");
-    badge.className = "badge " + cssClass(t.status);
+    badge.className = `badge ${cssClass(t.status)} clickable`;
     badge.textContent = label(t.status);
 
-    tdStatus.appendChild(select);
-    tdStatus.appendChild(document.createTextNode(" "));
+    badge.onclick = async () => {
+      const newStatus = nextStatus(t.status);
+      await updateStatus(t.id, newStatus);
+      await load();
+    };
+
     tdStatus.appendChild(badge);
 
-    // Delete
+    // Delete button
     const tdDelete = document.createElement("td");
     const btn = document.createElement("button");
     btn.className = "delete-btn";
     btn.textContent = "Delete";
     btn.onclick = () => removeTask(t.id);
+
     tdDelete.appendChild(btn);
 
     tr.append(tdTitle, tdStatus, tdDelete);
@@ -49,28 +61,18 @@ async function load() {
   }
 }
 
-function cssClass(s) {
-  return s.replace(" ", "-");
-}
-
-function label(s) {
-  return s
-    .split(" ")
-    .map(w => w[0].toUpperCase() + w.slice(1))
-    .join(" ");
-}
-
-// ADD TASK
+// ADD TASK (always default to NOT STARTED)
 async function addTask() {
   const title = titleEl.value.trim();
-  const status = statusEl.value;
-
   if (!title) return;
 
   await fetch("/api/tasks", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title, status }),
+    body: JSON.stringify({
+      title,
+      status: "not started"
+    })
   });
 
   titleEl.value = "";
@@ -82,12 +84,11 @@ async function updateStatus(id, status) {
   await fetch(`/api/tasks/${id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ status }),
+    body: JSON.stringify({ status })
   });
-  await load();
 }
 
-// DELETE TASK
+// DELETE
 async function removeTask(id) {
   await fetch(`/api/tasks/${id}`, { method: "DELETE" });
   await load();

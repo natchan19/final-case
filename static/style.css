@@ -77,3 +77,13 @@ tr:hover td {
   cursor: pointer;
 }
 .delete-btn:hover { color: #b91c1c; }
+
+/* Make badge clickable */
+.clickable {
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.clickable:hover {
+  transform: scale(1.07);
+}
