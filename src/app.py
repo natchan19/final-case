@@ -10,11 +10,17 @@ def create_app():
     next_id = {"value": 1}
     lock = threading.Lock()
 
-    # seed
+    # seed tasks
     with lock:
-        for title in ["Learn Flask", "Dockerize app", "Write README case-study"]:
-            tid = next_id["value"]; next_id["value"] += 1
-            tasks[tid] = {"id": tid, "title": title, "done": False}
+        sample_titles = ["Learn Flask", "Dockerize app", "Write README"]
+        for title in sample_titles:
+            tid = next_id["value"]
+            next_id["value"] += 1
+            tasks[tid] = {
+                "id": tid,
+                "title": title,
+                "status": "not started"   # NEW
+            }
 
     @app.get("/health")
     def health():
@@ -30,27 +36,41 @@ def create_app():
     def create_task():
         payload = request.get_json(force=True) or {}
         title = str(payload.get("title", "")).strip()
+        status = payload.get("status", "not started")
+
         if not title:
             return jsonify({"error": "title is required"}), 400
+
         with lock:
-            tid = next_id["value"]; next_id["value"] += 1
-            tasks[tid] = {"id": tid, "title": title, "done": False}
+            tid = next_id["value"]
+            next_id["value"] += 1
+            tasks[tid] = {
+                "id": tid,
+                "title": title,
+                "status": status,
+            }
             created = dict(tasks[tid])
+
         return jsonify(created), 201
 
     @app.patch("/api/tasks/<int:task_id>")
     def update_task(task_id):
         payload = request.get_json(force=True) or {}
+
         with lock:
             if task_id not in tasks:
                 return jsonify({"error": "not found"}), 404
+
             if "title" in payload:
                 t = str(payload["title"]).strip()
                 if t:
                     tasks[task_id]["title"] = t
-            if "done" in payload:
-                tasks[task_id]["done"] = bool(payload["done"])
+
+            if "status" in payload:
+                tasks[task_id]["status"] = payload["status"]
+
             updated = dict(tasks[task_id])
+
         return jsonify(updated), 200
 
     @app.delete("/api/tasks/<int:task_id>")
@@ -68,6 +88,6 @@ def create_app():
     return app
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", "8080"))
+    port = int(os.getenv("PORT", "5050"))
     app = create_app()
     app.run(host="0.0.0.0", port=port, debug=False)
