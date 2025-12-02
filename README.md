@@ -73,9 +73,6 @@ Confirmed that docker build -t task-tracker:latest . completes without errors.
 Confirmed that docker run --rm -p 5050:5050 --env-file .env task-tracker:latest starts the app and allows full use of the UI and API, matching the behavior of the local (non-Docker) run.
 
 # What's Next
-Improve the UI: Add a cleaner layout, better spacing, and customizable color themes so the dashboard looks more polished and easier to use.
-
-Additional task states: Instead of only “done/not done,” introduce statuses such as Not Started, In Progress, and Blocked, and update the API accordingly.
 
 Persist data: Replace the in-memory Python dictionary with a small SQLite database so tasks are saved even after the container restarts.
 
