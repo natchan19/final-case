@@ -1,0 +1,82 @@
+Copyright © 2025
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+### Attribution of Datasets, Libraries, Frameworks, and External Resources
+
+This project implements a lightweight task management application consisting of:
+
+A Flask-based REST API
+
+A simple in-memory data store
+
+A browser-based interactive UI using HTML, CSS, and JavaScript
+
+No third-party datasets, machine learning models, or external proprietary resources are used.
+
+### Python Libraries
+
+The backend makes use of standard open-source Python libraries, all under permissive licenses:
+
+Flask — BSD-3 License
+
+Flask-CORS — BSD License
+
+Werkzeug — BSD License
+
+Jinja2 — BSD License
+
+ItsDangerous — BSD License
+
+Click — BSD License
+
+These libraries ship with permissive, open licenses that allow redistribution and modification.
+
+### Frontend Libraries / Assets
+
+This project uses:
+
+Vanilla JavaScript (ES6) — No license restrictions
+
+Custom CSS — Authored by the project creator
+
+Bootstrap styles (optional) — MIT License (only minimal CSS class inspirations; no included Bootstrap files)
+
+No external UI libraries (React, Vue, Tailwind, etc.) were used unless explicitly added by the user.
+
+### Fonts
+
+All fonts used are system defaults (e.g., Arial, sans-serif).
+No external font files are bundled.
+
+### Icons
+
+Status badges (“Not Started”, “In Progress”, “Done”) use custom CSS inspired by Notion.
+No icon packs or copyrighted assets are included or embedded.
+
+
+### Images
+
+The demo architecture diagram and any project images are:
+
+Created by the project author
+
+No third-party datasets, stock photos, or copyrighted media are bundled.
+
+### Cloud Services
+
+The cloud deployment uses:
+
+Azure Web App for Containers
+
+Azure Container Registry (ACR)
+
+These are configuration components only.
+No proprietary datasets or models are included as part of the software.
+
+### No Proprietary Content
+
+
+All dependencies are covered under open-source licenses compatible with MIT.
