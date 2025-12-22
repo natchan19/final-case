@@ -77,6 +77,3 @@ Confirmed that docker run --rm -p 5050:5050 --env-file .env task-tracker:latest 
 Persist data: Replace the in-memory Python dictionary with a small SQLite database so tasks are saved even after the container restarts.
 
 Filter and sort options: Allow users to filter tasks by status or sort them by newest, oldest, or alphabetical.
-
-# Works Cited
-This was edited and polished with the help of ChatGPT
